@@ -72,10 +72,17 @@ export default class HomeView extends Vue {
   public query = "";
 
   async created() {
+    let usersStr = sessionStorage.getItem("user");
+
+    if (usersStr) {
+      let user = JSON.parse(usersStr);
+      this.$store.state.userName = user.login;
+      this.$store.state.userCities = user.cities;
+    }
+
     if (!this.$store.state.userName || this.$store.state.userName == "") {
       this.$router.push("signin");
     }
-
     this.search();
     this.loadData();
   }
@@ -114,7 +121,6 @@ export default class HomeView extends Vue {
   public async loadData() {
     let storeCities = this.$store.state.userCities;
     let cityIds = this.getCitieIds(storeCities);
-
     if (cityIds && cityIds !== "") {
       let response, link;
       if (storeCities.length === 1) {

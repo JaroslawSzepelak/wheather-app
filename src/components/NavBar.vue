@@ -44,6 +44,7 @@ export default class NavBar extends Vue {
   public logOut() {
     this.$store.commit("setUser", "");
     this.$store.commit("setCities", []);
+    sessionStorage.removeItem("userName");
     this.$router.push("/signin");
   }
 }

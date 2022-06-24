@@ -46,6 +46,7 @@ export default new Vuex.Store({
               element.cities.push(city);
 
               state.userCities = element.cities;
+              sessionStorage.setItem("user", JSON.stringify(element));
             }
           });
         }
@@ -68,6 +69,7 @@ export default new Vuex.Store({
               );
 
               state.userCities = element.cities;
+              sessionStorage.setItem("user", JSON.stringify(element));
             }
           });
         }

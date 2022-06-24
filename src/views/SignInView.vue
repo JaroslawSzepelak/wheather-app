@@ -56,6 +56,13 @@ export default class SignInView extends Vue {
   public password = "";
   public isValid = false;
 
+  async created() {
+    let userName = sessionStorage.getItem("userName");
+    if (userName && userName !== "") {
+      this.$router.push("/");
+    }
+  }
+
   public signIn() {
     let usersStr = localStorage.getItem("WheatherAppUsers");
 
@@ -68,6 +75,7 @@ export default class SignInView extends Vue {
         if (user) {
           this.$store.commit("setUser", user.login);
           this.$store.commit("setCities", user.cities);
+          sessionStorage.setItem("user", JSON.stringify(user));
           this.$router.push("/");
         } else {
           this.isValid = true;
